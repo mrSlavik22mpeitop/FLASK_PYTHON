@@ -1,0 +1,38 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+ <h1 align="center">Фильмы</h1>
+ <div class="d-flex justify-content-center">
+ <a href="{{url_for('newMovie')}}">
+   <button class="btn btn-primary">Добавить фильм</button>
+ </a>
+ </div>
+ <table class="table table-bordered mt-4">
+   <tr>
+       <th scope="col">Номер</th>
+       <th scope="col">Название фильма</th>
+       <th scope="col">Автор фильма</th>
+       <th scope="col">Актеры</th>
+       <th scope="col">Бюджет</th>
+       <th scope="col">Управление</th>
+    </tr>
+   {% for movie in movies %}
+     <tr>
+      <td>{{movie.id}}</td>
+      <td>{{movie.title}}</td>
+      <td>{{movie.author}}</td>
+      <td>{{movie.cast}}</td>
+      <td>{{movie.price}}</td>
+      <td> <a class="btn btn-info" href="{{url_for('editMovie', movie_id = movie.id )}}">
+      Изменение</a>
+      <a class="btn btn-info" href="{{url_for('deleteMovie', movie_id = movie.id )}}" style="margin-left: 10px;">
+      Удаление
+    </a>
+      </td>
+     </tr>
+  {% endfor %}
+ </table>
+</body>
+</html>

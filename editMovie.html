@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+<form action="{{ url_for('editMovie',movie_id = movie.id)}}" method="post">
+  <div class="form-group">
+    <label for="name">Название:</label>
+    <input type="text" class="form-control" name="name" value="{{movie.title }}">
+    <label for="author">Автор:</label>
+    <input type="text" class="form-control" name="author" value="{{movie.author}}">
+    <label for="cast">Актер:</label>
+    <input type="text" class="form-control" name="cast" value="{{movie.cast }}">
+    <label for="price">Бюджет:</label>
+    <input type="text" class="form-control" name="price" value="{{movie.price }}">
+    <button  class="btn btn-info" type="submit"> Обновить</button>
+    <a  class="btn btn-info" href='{{ url_for('showMovies') }}'>
+      Отменить
+    </a>
+  </div>
+</form>
