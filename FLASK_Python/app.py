@@ -20,11 +20,11 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
 @app.route('/')
 def showGeneral():
     return render_template("general.html")
@@ -71,18 +71,18 @@ def deleteMovie(movie_id):
         return redirect(url_for('showMovies', movie_id=movie_id))
     else:
         return render_template('deleteMovie.html', movie=movieToDelete)
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
 
 
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
 @app.route('/branchs')
 def showBranchs():
     branchs = session.query(Branch).all()
@@ -120,18 +120,18 @@ def deleteBranch(branch_id):
         return redirect(url_for('showBranchs', branch_id=branch_id))
     else:
         return render_template('deleteBranch.html', branch=branchToDelete)
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
 
 
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
 @app.route('/screenings')
 def showScreenings():
     screenings = session.query(Screening).all()
@@ -173,18 +173,18 @@ def deleteScreening(screening_id):
         return redirect(url_for('showScreenings', screening_id=screening_id))
     else:
         return render_template('deleteScreening.html', screening=screeningToDelete)
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
 
 
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
 @app.route('/seats')
 def showSeats():
     seats = session.query(Seat).all()
@@ -224,18 +224,18 @@ def deleteSeat(seat_id):
         return redirect(url_for('showSeats', seat_id=seat_id))
     else:
         return render_template('deleteSeat.html', seat=seatToDelete)
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
 
 
-#CLASS USERS
-#CLASS USERS
-#CLASS USERS
-#CLASS USERS
-#CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
 @app.route('/users')
 def showUsers():
     users = session.query(User).all()
@@ -274,18 +274,18 @@ def deleteUser(user_id):
         return redirect(url_for('showUsers', user_id=user_id))
     else:
         return render_template('deleteUser.html', user=userToDelete)
-#CLASS USERS
-#CLASS USERS
-#CLASS USERS
-#CLASS USERS
-#CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
 
 
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
 @app.route('/reservations')
 def showReservations():
     reservations = session.query(Reservation).all()
@@ -323,18 +323,18 @@ def deleteReservation(reservation_id):
         return redirect(url_for('showReservations', reservation_id=reservation_id))
     else:
         return render_template('deleteReservation.html', reservation=reservationToDelete)
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
-#CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
 
 
 
 @app.route('/seat_reserveds')
 def showSeat_Reserved():
     seat_reserveds = session.query(Seat_Reserved).all()
-    return render_template("seat_reserveds.html", seat_reserveds=seat_reserveds)
+    return render_template("seat_reserved.html", seat_reserveds=seat_reserveds)
 
 @app.route('/seat_reserveds/new/', methods=['GET', 'POST'])
 def newSeat_Reserved():
@@ -344,11 +344,14 @@ def newSeat_Reserved():
         session.commit()
         return redirect(url_for('showSeat_Reserved'))
     else:
-        return render_template('newSeat_Reserveds.html')
+        seats = session.query(Seat).all()
+        reservations = session.query(Reservation).all()
+        screenings = session.query(Screening).all()
+        return render_template('newSeat_Reserveds.html', seats=seats, reservations=reservations, screenings=screenings)
 
 @app.route("/seat_reserveds/<int:seat_reserveds_id>/edit/", methods=['GET', 'POST'])
-def editSeat_Reserved(seat_reserved_id):
-    editedSeat_Reserved = session.query(Seat_Reserved).filter_by(id=seat_reserved_id).one()
+def editSeat_Reserved(seat_reserveds_id):
+    editedSeat_Reserved = session.query(Seat_Reserved).filter_by(id=seat_reserveds_id).one()
     if request.method == 'POST':
         if request.form['seat_id'] or request.form['reservation_id'] or request.form['screening_id']:
             editedSeat_Reserved.seat_id = request.form['seat_id']
@@ -360,14 +363,14 @@ def editSeat_Reserved(seat_reserved_id):
 
 
 @app.route('/seat_reserveds/<int:seat_reserveds_id>/delete/', methods=['GET', 'POST'])
-def deleteSeat_Reserved(seat_reserved_id):
-    seat_reservedToDelete = session.query(Seat_Reserved).filter_by(id=seat_reserved_id).one()
+def deleteSeat_Reserved(seat_reserveds_id):
+    seat_reservedToDelete = session.query(Seat_Reserved).filter_by(id=seat_reserveds_id).one()
     if request.method == 'POST':
         session.delete(seat_reservedToDelete)
         session.commit()
-        return redirect(url_for('showSeat_Reserved', seat_reserved_id=seat_reserved_id))
+        return redirect(url_for('showSeat_Reserved', seat_reserveds_id=seat_reserveds_id))
     else:
-        return render_template('deleteReservation.html', seat_reserved=seat_reservedToDelete)
+        return render_template('deleteSeat_Reserved.html', seat_reserved=seat_reservedToDelete)
 
 if __name__ == '__main__':
     app.debug = True

@@ -1,0 +1,18 @@
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/general_witcher.css">
+<div class="size_witcher">
+<h1 class="new_edit_witcher">Изменение информации о закрепление места в кинозале</h1>
+<form action="{{ url_for('editSeat_Reserved',seat_reserveds_id = seat_reserved.id)}}" method="post">
+  <div class="form-group">
+    <label for="seat_id">Номер места в кинозале:</label>
+    <input class="form-control w-25" type="text" class="form-control" name="seat_id" value="{{seat_reserved.seat_id}}">
+    <label for="reservation_id">Номер резервирование пользователя:</label>
+    <input class="form-control w-25"  type="text" class="form-control" name="reservation_id" value="{{seat_reserved.reservation_id}}">
+    <label for="screening_id">Название сеанса:</label>
+    <input class="form-control w-25"  type="text" class="form-control" name="screening_id" value="{{seat_reserved.screening_id}}">
+    <button  class="btn btn-info mt-2 w-25" type="submit">Обновить</button>
+    <br>
+    <a class="btn btn-info mt-2 w-25" href='{{ url_for('showSeat_Reserved')}}'>Отменить</a>
+  </div>
+</form>
+</div>

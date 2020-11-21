@@ -13,33 +13,31 @@
         <li><a href="/seats"> Места</a></li>
         <li><a href="/users"> Пользователь</a></li>
         <li><a href="reservations">Резервирование</a></li>
+        <li> <a href="seat_reserveds">Закрепление места</a></li>
       </ul>
     </nav>
   </header>
- <h1 align="center">"Места"</h1>
+ <h1 align="center">"Пользователь"</h1>
  <div class="d-flex justify-content-center">
- <a href="{{url_for('newSeat')}}">
-   <button class="btn btn-primary">Выбрать ряд и место в кинозале</button>
+ <a href="{{url_for('newUser')}}">
+   <button class="btn btn-primary">Добавить нового пользователя</button>
  </a>
  </div>
  <table class="table table-bordered mt-4">
    <tr>
        <th scope="col">Номер</th>
-       <th scope="col">Ряд</th>
-       <th scope="col">Место</th>
-       <th scope="col">Номер кинозала</th>
+       <th scope="col">Имя</th>
+       <th scope="col">Пароль</th>
        <th scope="col">Управление</th>
-
     </tr>
-   {% for seat in seats %}
+   {% for user in users %}
      <tr>
-      <td>{{seat.id}}</td>
-      <td>{{seat.row}}</td>
-      <td>{{seat.number}}</td>
-      <td>{{seat.branch_id}}</td>
-      <td> <a class="btn btn-info" href="{{url_for('editSeat', seat_id = seat.id )}}">
+      <td>{{user.id}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.password}}</td>
+      <td> <a class="btn btn-info" href="{{url_for('editUser', user_id = user.id )}}">
       Изменение</a>
-      <a class="btn btn-info" href="{{url_for('deleteSeat', seat_id = seat.id )}}" style="margin-left: 10px;">
+      <a class="btn btn-info" href="{{url_for('deleteUser', user_id = user.id )}}" style="margin-left: 10px;">
       Удаление
     </a>
       </td>
