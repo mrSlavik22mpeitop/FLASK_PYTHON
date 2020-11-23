@@ -28,6 +28,7 @@ body
 {
     background-image: url(cd_project_red.png);
     margin: 0;
+    padding: 0;
 }
 a
 {
@@ -49,3 +50,53 @@ body {
     top: 5px;
     left: -67px;
 }
+
+.branch_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -88px;
+}
+.new_seat_witcher{
+    position: relative;
+    top: 5px;
+    left: -65px;
+}
+
+.new_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -50px;
+}
+
+.new_user_witcher{
+    position: relative;
+    top: 5px;
+    left: -50px;
+}
+
+.new_users_witcher_yen{
+    position: relative;
+    top: 5px;
+    left: -125px;
+}
+.new_seat_reserved_witcher{
+    position: relative;
+    top: 5px;
+    left: -170px;
+}
+.new_reservations_witcher{
+    position: relative;
+    top: 5px;
+    left: -70px;
+}
+.reservation_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -120px;
+}
+.new_seat_reserved_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -240px;
+}
+

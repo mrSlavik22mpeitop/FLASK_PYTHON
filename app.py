@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, render_template, request, redirect, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -6,6 +7,11 @@ from database_setup import Base, Branch
 from database_setup import Base, Screening
 from database_setup import Base, Seat
 from database_setup import Base, User
+from database_setup import Base, Reservation
+from database_setup import Base, Seat_Reserved
+
+
+
 
 app = Flask(__name__)
 
@@ -15,14 +21,18 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
 @app.route('/')
 def showGeneral():
-    return render_template("general.html")
+    now = datetime.date.today()
+    now_movie = session.query(Screening, Movie).filter(Screening.date_film == now).filter(Screening.movie_id == Movie.title).all()
+    print(now_movie)
+    return render_template("general.html", now_movie=now_movie)
+
 
 @app.route('/movies')
 def showMovies():
@@ -33,6 +43,8 @@ def showMovies():
 @app.route('/movies/new/', methods=['GET', 'POST'])
 def newMovie():
     if request.method == 'POST':
+        print(request.form['name'])
+        print(request.form['author'])
         newMovie = Movie(title=request.form['name'], author=request.form['author'], genre=request.form['genre'], price=request.form['price'])
         session.add(newMovie)
         session.commit()
@@ -64,20 +76,18 @@ def deleteMovie(movie_id):
         return redirect(url_for('showMovies', movie_id=movie_id))
     else:
         return render_template('deleteMovie.html', movie=movieToDelete)
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
-#Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
+# Movie CLASS
 
 
-
-
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
 @app.route('/branchs')
 def showBranchs():
     branchs = session.query(Branch).all()
@@ -115,19 +125,18 @@ def deleteBranch(branch_id):
         return redirect(url_for('showBranchs', branch_id=branch_id))
     else:
         return render_template('deleteBranch.html', branch=branchToDelete)
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
-#Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
+# Branch CLASS
 
 
-
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
 @app.route('/screenings')
 def showScreenings():
     screenings = session.query(Screening).all()
@@ -137,7 +146,7 @@ def showScreenings():
 @app.route('/screenings/new/', methods=['GET', 'POST'])
 def newScreening():
     if request.method == 'POST':
-        newScreening = Screening(movie_id=request.form['movie_id'], branch_id=request.form['branch_id'], screening_time=request.form['screening_time'])
+        newScreening = Screening(movie_id=request.form['movie_id'], branch_id=request.form['branch_id'], screening_time=request.form['screening_time'], date_film=request.form['date_film'])
         session.add(newScreening)
         session.commit()
         return redirect(url_for('showScreenings'))
@@ -152,10 +161,11 @@ def newScreening():
 def editScreening(screening_id):
     editedScreening = session.query(Screening).filter_by(id=screening_id).one()
     if request.method == 'POST':
-        if request.form['movie_id'] or request.form['branch_id'] or request.form['screening_time']:
+        if request.form['movie_id'] or request.form['branch_id'] or request.form['screening_time'] or request.form['date_film']:
             editedScreening.movie_id = request.form['movie_id']
             editedScreening.branch_id = request.form['branch_id']
             editedScreening.screening_time = request.form['screening_time']
+            editedScreening.date_film = request.form['date_film']
             return redirect(url_for('showScreenings'))
     else:
         return render_template('editScreening.html', screening=editedScreening)
@@ -169,18 +179,18 @@ def deleteScreening(screening_id):
         return redirect(url_for('showScreenings', screening_id=screening_id))
     else:
         return render_template('deleteScreening.html', screening=screeningToDelete)
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
-#Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
+# Screenings CLASS
 
 
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
 @app.route('/seats')
 def showSeats():
     seats = session.query(Seat).all()
@@ -220,13 +230,18 @@ def deleteSeat(seat_id):
         return redirect(url_for('showSeats', seat_id=seat_id))
     else:
         return render_template('deleteSeat.html', seat=seatToDelete)
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
-#CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
+# CLASS Seat
 
 
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
 @app.route('/users')
 def showUsers():
     users = session.query(User).all()
@@ -265,7 +280,103 @@ def deleteUser(user_id):
         return redirect(url_for('showUsers', user_id=user_id))
     else:
         return render_template('deleteUser.html', user=userToDelete)
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
+# CLASS USERS
 
+
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+@app.route('/reservations')
+def showReservations():
+    reservations = session.query(Reservation).all()
+    return render_template("reservations.html", reservations=reservations)
+
+@app.route('/reservations/new/', methods=['GET', 'POST'])
+def newReservation():
+    if request.method == 'POST':
+        newReservation = Reservation(reserved=request.form['reserved'], user_id=request.form['user_id'], paid=request.form['paid'])
+        session.add(newReservation)
+        session.commit()
+        return redirect(url_for('showReservations'))
+    else:
+        users = session.query(User).all()
+        return render_template('newReservations.html', users=users)
+
+@app.route("/reservations/<int:reservation_id>/edit/", methods=['GET', 'POST'])
+def editReservation(reservation_id):
+    editedReservation = session.query(Reservation).filter_by(id=reservation_id).one()
+    if request.method == 'POST':
+        if request.form['reserved'] or request.form['user_id'] or request.form['paid']:
+            editedReservation.reserved = request.form['reserved']
+            editedReservation.user_id = request.form['user_id']
+            editedReservation.paid = request.form['paid']
+            return redirect(url_for('showReservations'))
+    else:
+        return render_template('editReservation.html', reservation=editedReservation)
+
+@app.route('/reservations/<int:reservation_id>/delete/', methods=['GET', 'POST'])
+def deleteReservation(reservation_id):
+    reservationToDelete = session.query(Reservation).filter_by(id=reservation_id).one()
+    if request.method == 'POST':
+        session.delete(reservationToDelete)
+        session.commit()
+        return redirect(url_for('showReservations', reservation_id=reservation_id))
+    else:
+        return render_template('deleteReservation.html', reservation=reservationToDelete)
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+# CLASS RESERVATIONS
+
+
+
+@app.route('/seat_reserveds')
+def showSeat_Reserved():
+    seat_reserveds = session.query(Seat_Reserved).all()
+    return render_template("seat_reserved.html", seat_reserveds=seat_reserveds)
+
+@app.route('/seat_reserveds/new/', methods=['GET', 'POST'])
+def newSeat_Reserved():
+    if request.method == 'POST':
+        newSeat_Reserved = Seat_Reserved(seat_id=request.form['seat_id'], reservation_id=request.form['reservation_id'], screening_id=request.form['screening_id'])
+        session.add(newSeat_Reserved)
+        session.commit()
+        return redirect(url_for('showSeat_Reserved'))
+    else:
+        seats = session.query(Seat).all()
+        reservations = session.query(Reservation).all()
+        screenings = session.query(Screening).all()
+        return render_template('newSeat_Reserveds.html', seats=seats, reservations=reservations, screenings=screenings)
+
+@app.route("/seat_reserveds/<int:seat_reserveds_id>/edit/", methods=['GET', 'POST'])
+def editSeat_Reserved(seat_reserveds_id):
+    editedSeat_Reserved = session.query(Seat_Reserved).filter_by(id=seat_reserveds_id).one()
+    if request.method == 'POST':
+        if request.form['seat_id'] or request.form['reservation_id'] or request.form['screening_id']:
+            editedSeat_Reserved.seat_id = request.form['seat_id']
+            editedSeat_Reserved.reservation_id = request.form['reservation_id']
+            editedSeat_Reserved.screening_id = request.form['screening_id']
+            return redirect(url_for('showSeat_Reserved'))
+    else:
+        return render_template('editSeat_Reserved.html', seat_reserved=editedSeat_Reserved)
+
+
+@app.route('/seat_reserveds/<int:seat_reserveds_id>/delete/', methods=['GET', 'POST'])
+def deleteSeat_Reserved(seat_reserveds_id):
+    seat_reservedToDelete = session.query(Seat_Reserved).filter_by(id=seat_reserveds_id).one()
+    if request.method == 'POST':
+        session.delete(seat_reservedToDelete)
+        session.commit()
+        return redirect(url_for('showSeat_Reserved', seat_reserveds_id=seat_reserveds_id))
+    else:
+        return render_template('deleteSeat_Reserved.html', seat_reserved=seat_reservedToDelete)
 
 if __name__ == '__main__':
     app.debug = True

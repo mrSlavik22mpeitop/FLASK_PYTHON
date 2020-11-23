@@ -21,7 +21,7 @@ class Movie(Base):
     title = Column(String(250), nullable=False)
     author = Column(String(250), nullable=False)
     genre = Column(String(250))
-    price = Column(String(250))
+    price = Column(Integer)
 
 
 class Branch(Base):
@@ -36,6 +36,7 @@ class Screening(Base):
     movie_id = Column(Integer, ForeignKey(Movie.id), nullable=False)
     branch_id = Column(Integer, ForeignKey(Branch.id), nullable=False)
     screening_time = Column(String(250), nullable=False)
+    date_film = Column(String(250), nullable=False)
 
 
 class Seat(Base):
@@ -48,8 +49,26 @@ class Seat(Base):
 class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
-    username = Column(Integer, nullable=False)
-    password = Column(Integer, nullable=False)
+    username = Column(String(250), nullable=False)
+    password = Column(String(250), nullable=False)
+
+
+class Reservation(Base):
+     __tablename__ = "reservation"
+     id = Column(Integer, primary_key=True)
+     reserved = Column(Integer, nullable=False)
+     user_id = Column(Integer, ForeignKey(User.id), nullable=False)
+     paid = Column(Integer, nullable=False)
+
+
+
+class Seat_Reserved(Base):
+    __tablename__ = "seat_reserved"
+    id = Column(Integer, primary_key=True)
+    seat_id = Column(Integer, ForeignKey(Seat.id), nullable=False)
+    reservation_id = Column(Integer, ForeignKey(Reservation.id), nullable=False)
+    screening_id = Column(Integer, ForeignKey(Screening.id), nullable=False)
+
 
 engine = create_engine('sqlite:///books-collection.db')
 Base.metadata.create_all(engine)

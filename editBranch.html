@@ -1,0 +1,16 @@
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/general_witcher.css">
+<div class="size_witcher">
+<form action="{{ url_for('editBranch',branch_id = branch.id)}}" method="post">
+  <h1 class="branch_edit_witcher">Изменение информации о кинозале</h1>
+  <div class="form-group">
+    <label for="name">Название зала:</label>
+    <input type="text" class="form-control w-25" name="name" value="{{branch.name}}">
+    <label for="seats">Количество мест:</label>
+    <input type="text" class="form-control w-25" name="seats" value="{{branch.seats}}">
+    <button  class="btn btn-primary w-25 mt-2" type="submit"> Обновить</button>
+    <br>
+    <a class="btn btn-primary w-25 mt-2" href='{{ url_for('showBranchs') }}'>Отменить</a>
+  </div>
+</form>
+</div>

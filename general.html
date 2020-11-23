@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/general_witcher.css">
+    <meta charset="UTF-8">
+    <title>Курсовой проект</title>
+</head>
+<body>
+ <header>
+    <nav class="default-nav">
+      <ul>
+          <li> <a href="/" style="color:yellow">Ведьмак</a> </li>
+          <li> <a href="/movies">Фильмы</a> </li>
+        <li> <a href="/branchs">Кинозал</a> </li>
+        <li> <a href="/screenings">Сеанс</a>  </li>
+        <li> <a href="/seats">Места</a> </li>
+        <li> <a href="/users">Пользователь</a> </li>
+        <li> <a href="reservations">Резервирование</a></li>
+        <li> <a href="seat_reserveds">Закрепление места</a></li>
+      </ul>
+    </nav>
+  </header>
+ <br>
+<h1 align="center" style="color:#004990">Информационная система кинотеатра: "Ведьмак"</h1>
+ <br>
+ <h1 align="center">Сегодня в прокате</h1>
+ <table class="table table-striped mt-4">
+      <tr>
+       <th scope="col">Номер</th>
+       <th scope="col">Название</th>
+       <th scope="col">Автор</th>
+       <th scope="col">Жанр</th>
+    </tr>
+    {% for screening, movie in now_movie %}
+      <tr>
+      <td>{{movie.id}}</td>
+      <td>{{movie.title}}</td>
+      <td>{{movie.author}}</td>
+      <td>{{movie.genre}}</td>
+      {% endfor %}
+      </tr>
+ </table>
+</body>
+</html>

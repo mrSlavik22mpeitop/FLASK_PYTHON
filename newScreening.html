@@ -1,0 +1,29 @@
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/general_witcher.css">
+<div class="size_witcher">
+<h1>Информация о сеансе</h1>
+<form action="#" method="post">
+  <div class="form-group">
+
+    <label for="movie_id">Название фильма:</label>
+    <select required class="form-control w-25"  name="movie_id">
+    {% for movie in movies %}
+      <option value="{{movie.title}}" {% if movie_title=="movies" %} selected {% endif %}>{{movie.title}}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <label for="branch_id">Название кинозала:</label>
+    <select required class="form-control w-25"  name="branch_id">
+      {% for branch in branchs %}
+      <option value="{{branch.name}}" {% if branch_name=="branch" %} selected {% endif %}>{{branch.name}}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <label for="screening_time">Время сеанса:</label>
+    <input type="time" required class="form-control w-25" maxlength="100" name="screening_time" placeholder="Время сеанса">
+    <label for="date_film">Дата проката:</label>
+    <input type="date" required class="form-control w-25" maxlength="100" name="date_film" placeholder="15/15/2020">
+    <button  class="btn btn-primary mt-2 w-25" type="submit">Добавить</button>
+   </div>
+</form>
+</div>>
