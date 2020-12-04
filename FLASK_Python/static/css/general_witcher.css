@@ -1,0 +1,109 @@
+.default-nav {
+
+  display: block;
+  background-color: #004990;
+  overflow: hidden;
+
+}
+default-nav figure {
+    float: right;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.default-nav ul li {
+    list-style-type: none;
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 25px;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+body
+{
+    background-image: url(cd_project_red.png);
+    margin: 0;
+    padding: 0;
+}
+a
+{
+    color:white;
+    text-decoration: none;
+}
+
+.size_witcher{
+    position: relative;
+    top: 10px;
+    left: 640px;
+}
+body {
+    max-width: 1700px; /* Максимальная ширина страницы в пикселах */
+   }
+
+.movie_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -67px;
+}
+
+.branch_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -88px;
+}
+.new_seat_witcher{
+    position: relative;
+    top: 5px;
+    left: -65px;
+}
+
+.new_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -50px;
+}
+
+.new_user_witcher{
+    position: relative;
+    top: 5px;
+    left: -50px;
+}
+
+.new_users_witcher_yen{
+    position: relative;
+    top: 5px;
+    left: -125px;
+}
+.new_seat_reserved_witcher{
+    position: relative;
+    top: 5px;
+    left: -170px;
+}
+.new_reservations_witcher{
+    position: relative;
+    top: 5px;
+    left: -70px;
+}
+.reservation_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -120px;
+}
+.new_seat_reserved_edit_witcher{
+    position: relative;
+    top: 5px;
+    left: -240px;
+}
+.mifi{
+    font-size: 37px;
+}
+
+.brd {
+    border: 4px double black; /* Параметры границы *//* Цвет фона */
+    padding: 50px; /* Поля вокруг текста */
+   }

@@ -1,0 +1,47 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/general_witcher.css">
+<title>Курсовой проект: Пользователь</title>
+</head>
+<body>
+<header>
+    <nav class="default-nav">
+      <ul>
+          <li> <a href="/witcher" style="color:yellow">Ведьмак</a> </li>
+          <li><a href="/movies"> Фильмы</a></li>
+        <li><a href="/branchs"> Кинозал</a></li>
+        <li><a href="/screenings"> Сеанс</a></li>
+        <li><a href="/seats"> Места</a></li>
+        <li><a href="/users"> Пользователь</a></li>
+        <li><a href="reservations">Резервирование</a></li>
+        <li> <a href="seat_reserveds">Закрепление места</a></li>
+      </ul>
+    </nav>
+  </header>
+ <h1 align="center">"Пользователь"</h1>
+ <div class="d-flex justify-content-center">
+ <a href="{{url_for('newUser')}}">
+   <button class="btn btn-primary">Добавить нового пользователя</button>
+ </a>
+ </div>
+ <table class="table table-bordered mt-4">
+   <tr>
+       <th scope="col">Номер</th>
+       <th scope="col">Имя</th>
+       <th scope="col">Пароль</th>
+       <th scope="col">Модифицирование таблицы</th>
+    </tr>
+   {% for user in users %}
+     <tr>
+      <td>{{user.id}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.password}}</td>
+      <td> <a class="btn btn-primary" href="{{url_for('editUser', user_id = user.id )}}">Изменение</a>
+      <a class="btn btn-primary" href="{{url_for('deleteUser', user_id = user.id )}}" style="margin-left: 10px;">Удаление</a>
+      </td>
+     </tr>
+  {% endfor %}
+ </table>
+</body>
+</html>

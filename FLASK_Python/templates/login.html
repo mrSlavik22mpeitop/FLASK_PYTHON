@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../static/form-style.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/general_witcher.css">
+        <script>
+        function validateForm() {
+        var x = document.forms["login-form"]["autorization_username"].value;
+        if (x==null || x=="") {
+            alert("Name must be filled out");
+            return false;
+        }
+        var y = document.forms["login-form"]["autorization_password"].value;
+        if (y==null || y=="") {
+            alert("Password name must be filled out");
+            return false;
+        }
+        }
+        </script>
+
+    </head>
+   <body>
+   <header>
+    <nav class="default-nav">
+      <ul>
+          <li> <a href="" style="color:yellow">Ведьмак</a> </li>
+          <li> <a href="">Фильмы</a> </li>
+        <li> <a href="">Кинозал</a> </li>
+        <li> <a href="">Сеанс</a>  </li>
+        <li> <a href="">Места</a> </li>
+        <li> <a href="">Пользователь</a> </li>
+        <li> <a href="">Резервирование</a></li>
+        <li> <a href="">Закрепление места</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+    <div class="d-flex justify-content-center mt-4">
+      <form  class="w-25 brd" name="login-form"  action="/login" onsubmit="return validateForm()" target="_self" method="POST">
+             <h2 class="mifi" align="center">"Аутентификация"</h2>
+                {% if error %}
+                <p>{{ error }}</p>
+                {% endif %}
+          <div class="form-group">
+          <label for="loginInputLogin1">Логин:</label>
+          <input required class="form-control" type ="text"  name ="autorization_username" placeholder="Username">
+          </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Пароль:</label>
+    <input required class="form-control" type="password"  name="autorization_password" placeholder="Password">
+  </div>
+  <div class="d-flex justify-content-center">
+  <button type="submit" class="btn btn-primary w-100">Submit</button>
+  </div>
+</form>
+    </div>
+</body>
+</html>
