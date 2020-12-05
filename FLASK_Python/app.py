@@ -14,10 +14,10 @@ from database_setup import Base, Autorization
 from flask import g
 import sqlite3
 
-DATABASE = './books-collection.db'
+DATABASE = './cinema-collection.db'
 app = Flask(__name__)
 
-engine = create_engine('sqlite:///books-collection.db?check_same_thread=False')
+engine = create_engine('sqlite:///cinema-collection.db?check_same_thread=False')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)

@@ -13,7 +13,7 @@
         <li> <a href="/branchs">Кинозал</a></li>
         <li> <a href="/screenings">Сеанс</a></li>
         <li> <a href="/seats">Места</a></li>
-        <li> <a href="/users">Пользователь</a></li>
+        <li> <a href="/users">Покупатель</a></li>
         <li><a href="reservations">Резервирование</a></li>
         <li> <a href="seat_reserveds">Закрепление места</a></li>
       </ul>
@@ -33,7 +33,8 @@
        <th scope="col">Количество мест</th>
        <th scope="col">Модифицирование таблицы</th>
     </tr>
-   {% for branch in branchs %}
+ {% set sort_on = request.args.sort_on|default('id') %}
+   {% for branch in branchs|sort(attribute=sort_on) %}
      <tr>
       <td>{{branch.id}}</td>
       <td>{{branch.name}}</td>

@@ -1,23 +1,25 @@
 <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
 <link rel="stylesheet" href="/static/css/general_witcher.css">
-<div class="size_witcher">
-<h1>Информация о фильме</h1>
-<form action="#" method="post">
+<h1 align="center" class="mt-4">Информация о фильме</h1>
+<div class="d-flex justify-content-center mt-4">
+<form class="w-25 brd" action="#" method="post">
   <div class="form-group">
     <label for="name">Название:</label>
-    <input required class="form-control w-25"  type="text" maxlength="100" name="name" placeholder="Название фильма">
+    <input required class="form-control"  type="text" maxlength="100" name="name" placeholder="Название фильма">
 
     <label for="author">Автор:</label>
-    <input required class="form-control w-25" maxlength="100" name="author" placeholder="Автор фильма">
+    <input required class="form-control" maxlength="100" name="author" placeholder="Автор фильма">
 
     <label for="genre">Жанр:</label>
-    <input class="form-control w-25" maxlength="100" name="genre" placeholder="Жанр фильма">
+    <input class="form-control" maxlength="100" name="genre" placeholder="Жанр фильма">
 
       <label for="price">Бюджет:</label>
-    <input class="form-control w-25" maxlength="100" name="price" placeholder="10000000000$">
-
-    <button  class="btn btn-primary mt-2 w-25" type="submit">Добавить</button>
+    <input class="form-control" maxlength="100" name="price" placeholder="10000000000$">
+    <div class="d-flex justify-content-center">
+    <button  class="btn btn-primary mt-2 w-100" type="submit">Добавить</button>
+    </div>
    </div>
+
 </form>
 </div>
 

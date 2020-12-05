@@ -13,7 +13,7 @@
         <li><a href="/branchs"> Кинозал</a></li>
         <li><a href="/screenings"> Сеанс</a></li>
         <li><a href="/seats"> Места</a></li>
-        <li><a href="/users"> Пользователь</a></li>
+        <li><a href="/users">Покупатель</a></li>
         <li><a href="/reservations">Резервирование</a></li>
         <li> <a href="/seat_reserveds">Закрепление места</a></li>
       </ul>
@@ -35,7 +35,8 @@
        <th scope="col">Дата фильма</th>
        <th scope="col">Модифицирование таблицы</th>
     </tr>
-   {% for screening in screenings %}
+ {% set sort_on = request.args.sort_on|default('id')%}
+   {% for screening in screenings|sort(attribute=sort_on) %}
      <tr>
       <td>{{screening.id}}</td>
       <td>{{screening.movie_id}}</td>

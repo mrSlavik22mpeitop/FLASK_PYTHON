@@ -13,7 +13,7 @@
         <li><a href="/branchs">Кинозал</a></li>
         <li><a href="/screenings">Сеанс</a></li>
         <li><a href="/seats">Места</a></li>
-        <li><a href="/users">Пользователь</a></li>
+        <li><a href="/users">Покупатель</a></li>
         <li><a href="reservations">Резервирование</a></li>
         <li> <a href="seat_reserveds">Закрепление места</a></li>
       </ul>
@@ -33,7 +33,8 @@
        <th scope="col">Номер сеанса</th>
        <th scope="col">Модифицирование таблицы</th>
     </tr>
-   {% for seat_reserved in seat_reserveds %}
+ {% set sort_on = request.args.sort_on|default('id')%}
+   {% for seat_reserved in seat_reserveds|sort(attribute=sort_on) %}
      <tr>
       <td>{{seat_reserved.id}}</td>
       <td>{{seat_reserved.seat_id}}</td>

@@ -13,16 +13,16 @@
         <li><a href="/branchs"> Кинозал</a></li>
         <li><a href="/screenings"> Сеанс</a></li>
         <li><a href="/seats"> Места</a></li>
-        <li><a href="/users"> Пользователь</a></li>
+        <li><a href="/users">Покупатель</a></li>
         <li><a href="reservations">Резервирование</a></li>
         <li> <a href="seat_reserveds">Закрепление места</a></li>
       </ul>
     </nav>
   </header>
- <h1 align="center">"Пользователь"</h1>
+ <h1 align="center">"Покупатель"</h1>
  <div class="d-flex justify-content-center">
  <a href="{{url_for('newUser')}}">
-   <button class="btn btn-primary">Добавить нового пользователя</button>
+   <button class="btn btn-primary">Добавить нового покупателя</button>
  </a>
  </div>
  <table class="table table-bordered mt-4">
@@ -32,7 +32,8 @@
        <th scope="col">Пароль</th>
        <th scope="col">Модифицирование таблицы</th>
     </tr>
-   {% for user in users %}
+  {% set sort_on = request.args.sort_on|default('id')%}
+   {% for user in users|sort(attribute=sort_on) %}
      <tr>
       <td>{{user.id}}</td>
       <td>{{user.username}}</td>

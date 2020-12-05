@@ -1,29 +1,29 @@
 <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
 <link rel="stylesheet" href="/static/css/general_witcher.css">
-<div class="size_witcher">
-<h1 class="new_seat_reserved_witcher">Информация о закрепеление места в кинозале</h1>
-<form action="#" method="post">
+<h1 align="center" class="mt-4">Информация о закрепеление места в кинозале</h1>
+<div class="d-flex justify-content-center mt-4">
+<form class="w-25 brd"  action="#" method="post">
   <div class="form-group">
     <label for="seat_id">Номер места в кинозале:</label>
-    <select required class="form-control w-25"  name="seat_id">
+    <select required class="form-control"  name="seat_id">
     {% for seat in seats %}
       <option value="{{seat.id}}" {% if seat_id=="seat_id" %} selected {% endif %}>{{seat.id}}</option>
       {% endfor %}
     </select>
     <label for="reservation_id">Номер резервирования пользователя:</label>
-    <select required class="form-control w-25"  name="reservation_id">
+    <select required class="form-control"  name="reservation_id">
       {% for reservation in reservations %}
       <option value="{{reservation.id}}" {% if reservation_id=="reservations" %} selected {% endif %}>{{reservation.id}}</option>
       {% endfor %}
     </select>
     <label for="screening_id">Номер сеанса:</label>
-    <select required class="form-control w-25"  name="screening_id">
+    <select required class="form-control"  name="screening_id">
       {% for screening in screenings %}
       <option value="{{screening.id}}" {% if screening_id=="screenings" %} selected {% endif %}>{{screening.id}}</option>
       {% endfor %}
     </select>
 
-    <button  class="btn btn-primary mt-2 w-25" type="submit">Добавить</button>
+    <button  class="btn btn-primary mt-2 w-100" type="submit">Добавить</button>
    </div>
 </form>
 </div>

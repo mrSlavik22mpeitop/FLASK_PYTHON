@@ -76,5 +76,5 @@ class Autorization(Base):
     autorization_username = Column(String(250), nullable=False)
     autorization_password = Column(String(250), nullable=False)
 
-engine = create_engine('sqlite:///books-collection.db')
+engine = create_engine('sqlite:///cinema-collection.db')
 Base.metadata.create_all(engine)
