@@ -33,6 +33,7 @@
        <th scope="col">Название кинозала</th>
        <th scope="col">Время сеанса</th>
        <th scope="col">Дата фильма</th>
+       <th scope="col">Стоимость</th>
        <th scope="col">Модифицирование таблицы</th>
     </tr>
  {% set sort_on = request.args.sort_on|default('id')%}
@@ -43,6 +44,7 @@
       <td>{{screening.branch_id}}</td>
       <td>{{screening.screening_time}}</td>
       <td>{{screening.date_film}}</td>
+      <td>{{screening.price}}</td>
       <td> <a class="btn btn-primary" href="{{url_for('editScreening', screening_id = screening.id )}}">Изменение</a>
       <a class="btn btn-primary" href="{{url_for('deleteScreening', screening_id = screening.id )}}" style="margin-left: 10px;">Удаление</a>
       </td>

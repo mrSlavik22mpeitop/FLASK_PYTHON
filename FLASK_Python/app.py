@@ -194,7 +194,7 @@ def showScreenings():
 @app.route('/screenings/new/', methods=['GET', 'POST'])
 def newScreening():
     if request.method == 'POST':
-        newScreening = Screening(movie_id=request.form['movie_id'], branch_id=request.form['branch_id'], screening_time=request.form['screening_time'], date_film=request.form['date_film'])
+        newScreening = Screening(movie_id=request.form['movie_id'], branch_id=request.form['branch_id'], screening_time=request.form['screening_time'], date_film=request.form['date_film'], price=request.form['price'])
         session.add(newScreening)
         session.commit()
         return redirect(url_for('showScreenings'))
@@ -209,11 +209,12 @@ def newScreening():
 def editScreening(screening_id):
     editedScreening = session.query(Screening).filter_by(id=screening_id).one()
     if request.method == 'POST':
-        if request.form['movie_id'] or request.form['branch_id'] or request.form['screening_time'] or request.form['date_film']:
+        if request.form['movie_id'] or request.form['branch_id'] or request.form['screening_time'] or request.form['date_film'] or request.form['price']:
             editedScreening.movie_id = request.form['movie_id']
             editedScreening.branch_id = request.form['branch_id']
             editedScreening.screening_time = request.form['screening_time']
             editedScreening.date_film = request.form['date_film']
+            editedScreening.price = request.form['price']
             return redirect(url_for('showScreenings'))
     else:
         return render_template('editScreening.html', screening=editedScreening)
@@ -299,7 +300,7 @@ def showUsers():
 @app.route('/users/new/', methods=['GET', 'POST'])
 def newUser():
     if request.method == 'POST':
-        newUser = User(username=request.form['username'], password=request.form['password'])
+        newUser = User(first_name=request.form['first_name'], second_name=request.form['second_name'], email=request.form['email'])
         session.add(newUser)
         session.commit()
         return redirect(url_for('showUsers'))
@@ -311,9 +312,10 @@ def newUser():
 def editUser(user_id):
     editedUser = session.query(User).filter_by(id=user_id).one()
     if request.method == 'POST':
-        if request.form['username'] or request.form['password']:
-            editedUser.username = request.form['username']
-            editedUser.password = request.form['password']
+        if request.form['first_name'] or request.form['second_name'] or request.form['email']:
+            editedUser.first_name = request.form['first_name']
+            editedUser.second_name = request.form['second_name']
+            editedUser.email = request.form['email']
             return redirect(url_for('showUsers'))
     else:
         return render_template('editUser.html', user=editedUser)

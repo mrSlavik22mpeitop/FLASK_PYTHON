@@ -4,10 +4,12 @@
 <div class="d-flex justify-content-center mt-4">
 <form class="w-25 brd" action="{{ url_for('editUser',user_id = user.id)}}" method="post">
   <div class="form-group">
-    <label for="username">Имя:</label>
-    <input class="form-control w-100" type="text" class="form-control" name="username" value="{{user.username}}">
-    <label for="password">Пароль:</label>
-    <input class="form-control w-100" type="text" class="form-control" name="password" value="{{user.password}}">
+    <label for="first_name">Имя:</label>
+    <input class="form-control w-100" type="text" class="form-control" name="first_name" value="{{user.first_name}}">
+    <label for="second_name">Фамилия:</label>
+    <input class="form-control w-100" type="text" class="form-control" name="second_name" value="{{user.second_name}}">
+    <label for="email">Почта:</label>
+    <input class="form-control w-100" type="text" class="form-control" name="email" value="{{user.email}}">
     <button  class="btn btn-primary mt-2 w-100" type="submit"> Обновить</button>
     <br>
     <a class="btn btn-primary mt-2 w-100" href='{{ url_for('showUsers') }}'>Отменить</a>

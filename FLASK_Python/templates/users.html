@@ -29,15 +29,17 @@
    <tr>
        <th scope="col">Номер</th>
        <th scope="col">Имя</th>
-       <th scope="col">Пароль</th>
+       <th scope="col">Фамилия</th>
+       <th scope="col">Почта</th>
        <th scope="col">Модифицирование таблицы</th>
     </tr>
   {% set sort_on = request.args.sort_on|default('id')%}
    {% for user in users|sort(attribute=sort_on) %}
      <tr>
       <td>{{user.id}}</td>
-      <td>{{user.username}}</td>
-      <td>{{user.password}}</td>
+      <td>{{user.first_name}}</td>
+      <td>{{user.second_name}}</td>
+      <td>{{user.email}}</td>
       <td> <a class="btn btn-primary" href="{{url_for('editUser', user_id = user.id )}}">Изменение</a>
       <a class="btn btn-primary" href="{{url_for('deleteUser', user_id = user.id )}}" style="margin-left: 10px;">Удаление</a>
       </td>

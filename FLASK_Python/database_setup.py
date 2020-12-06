@@ -37,6 +37,7 @@ class Screening(Base):
     branch_id = Column(Integer, ForeignKey(Branch.id), nullable=False)
     screening_time = Column(String(250), nullable=False)
     date_film = Column(String(250), nullable=False)
+    price = Column(String(250), nullable=False)
 
 
 class Seat(Base):
@@ -49,8 +50,9 @@ class Seat(Base):
 class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
-    username = Column(String(250), nullable=False)
-    password = Column(String(250), nullable=False)
+    first_name = Column(String(250), nullable=False)
+    second_name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
 
 
 class Reservation(Base):

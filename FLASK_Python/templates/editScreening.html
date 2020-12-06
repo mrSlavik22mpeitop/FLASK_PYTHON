@@ -12,6 +12,8 @@
     <input type="time" class="form-control" name="screening_time" value="{{screening.screening_time}}">
     <label for="date_film">Дата проката:</label>
     <input type="date" class="form-control" name="date_film" value="{{screening.date_film}}">
+    <label for="price">Стоимость:</label>
+    <input type="price" class="form-control" name="price" value="{{screening.price}}">
     <button  class="btn btn-primary mt-2 w-100" type="submit"> Обновить</button>
     <br>
     <a class="btn btn-primary mt-2 w-100" href='{{ url_for('showScreenings') }}'>Отменить</a>
